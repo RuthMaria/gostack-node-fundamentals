@@ -18,11 +18,14 @@ class CreateTransactionService {
 
   public execute({ title, value, type }: Request): Transaction {
     
-    const balance = this.transactionsRepository.getBalance()
-    const isNotAbleTransition = type === 'outcome' && value > balance.total
+    if( !['income', 'outcome'.includes(type)]){
+      throw Error('Transaction type is invalid!')
+    }
+    const { total } = this.transactionsRepository.getBalance()
+    const deniedTransition = type === 'outcome' && value > total
 
-    if(isNotAbleTransition)
-          throw Error('Transação negada!')
+    if(deniedTransition)
+          throw Error('You do not have enough balance!')
   
     const transaction = this.transactionsRepository.create({
       title,

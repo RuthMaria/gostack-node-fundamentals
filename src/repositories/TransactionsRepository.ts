@@ -4,7 +4,7 @@ interface Balance {
   income: number;
 
   outcome: number;
-  
+
   total: number;
 }
 
@@ -27,10 +27,10 @@ class TransactionsRepository {
     return this.transactions
   }
 
-  public sum(type: string): number {
-      const sum = this.transactions.reduce((accumulator, currentValue) => {
-        if(currentValue.type === type)
-              return accumulator += currentValue.value
+  public sumValues(type: string): number {
+      const sum = this.transactions.reduce((accumulator, transaction) => {
+        if(transaction.type === type)
+              return accumulator += transaction.value
         else 
               return accumulator
     }, 0)
@@ -40,8 +40,8 @@ class TransactionsRepository {
 
   public getBalance(): Balance {
     
-    const sumIncome = this.sum('income')
-    const sumOutcome = this.sum('outcome')
+    const sumIncome = this.sumValues('income')
+    const sumOutcome = this.sumValues('outcome')
     const total = sumIncome - sumOutcome
 
     const balance: Balance = {
