@@ -21,7 +21,9 @@ class CreateTransactionService {
     if( !['income', 'outcome'.includes(type)]){
       throw Error('Transaction type is invalid!')
     }
+    
     const { total } = this.transactionsRepository.getBalance()
+
     const deniedTransition = type === 'outcome' && value > total
 
     if(deniedTransition)
