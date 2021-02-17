@@ -46,7 +46,7 @@ Services:
 - Clone this repository
 
 ```
-git clone https://github.com/RuthMaria/GoBarber-backend.git
+git clone https://github.com/RuthMaria/gostack-node-fundamentals.git
 ```
 
 - Install dependencies
